@@ -1,5 +1,5 @@
 # VideoServer_Group20
-Link source code tham khảo: `https://github.com/superdesk/video-server`
+Link source code tham khảo: https://github.com/superdesk/video-server
 
 
 ## **Ngôn ngữ sử dụng**
