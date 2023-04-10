@@ -1,6 +1,9 @@
 # VideoServer_Group20
 Link source code tham khảo: https://github.com/superdesk/video-server
 
+## Thành viên nhóm
+Nguyễn Thị Bích Liên - 20110335
+Đặng Nguyễn Thiên Đạt - 20110629
 
 ## **Ngôn ngữ sử dụng**
 - Python
