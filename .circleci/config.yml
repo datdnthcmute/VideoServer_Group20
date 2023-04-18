@@ -22,8 +22,7 @@ jobs:
       - run:
           name: Nhân bản project
           command: |
-            # python -m pytest test_create_project.py
-            python -m pytest tests/api/test_duplicate_project.py
+            python -m pytest tests/api/test_create_project.py
       - run:
           name: Test danh sách project
           command: |
