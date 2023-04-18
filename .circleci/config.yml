@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Cài đặt pytest
           command: |
-            pip install pytest requests
+            pip install pytest requests flask pymongo
       - run:
           name: Nhân bản project
           command: |
