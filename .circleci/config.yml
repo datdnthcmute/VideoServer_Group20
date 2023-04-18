@@ -16,8 +16,14 @@ jobs:
       - run:
           name: Cài đặt pytest
           command: |
-            pip install pytest requests flask pymongo
+            git clone https://github.com/superdesk/video-server.git
             pip install -e video-server/[dev]
+            pip install pytest requests flask pymongo
+            export FLASK_ENV=development
+      -run:
+        name: Chạy video server
+        command:
+          python -m videoserver.app
       - run:
           name: Nhân bản project
           command: |
