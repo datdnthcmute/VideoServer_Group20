@@ -17,6 +17,7 @@ jobs:
           name: Cài đặt pytest
           command: |
             pip install pytest requests flask pymongo
+            pip install -e video-server/[dev]
       - run:
           name: Nhân bản project
           command: |
