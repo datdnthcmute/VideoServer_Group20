@@ -101,6 +101,6 @@ def get_app(config=None):
 if __name__ == '__main__':
     debug = True
     host = '0.0.0.0'
-    port = int(os.environ.get('PORT', '5050'))
+    port = int(os.environ.get('PORT', '80'))
     app = get_app()
     app.run(host=host, port=port)
