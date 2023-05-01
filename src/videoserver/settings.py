@@ -94,7 +94,7 @@ ITEMS_PER_PAGE = int(env('ITEMS_PER_PAGE', 25))
 DEFAULT_TOTAL_TIMELINE_THUMBNAILS = int(env('DEFAULT_TOTAL_TIMELINE_THUMBNAILS', 40))
 
 #: set PORT for video server
-VIDEO_SERVER_PORT = env('VIDEO_SERVER_PORT', 80)
+VIDEO_SERVER_PORT = env('VIDEO_SERVER_PORT', 5050)
 
 #: use custom url for reading video/picture files. Affects how urls are build in `add_urls`
 FILE_STREAM_PROXY_ENABLED = strtobool(env('FILE_STREAM_PROXY_ENABLED', 'False'))
