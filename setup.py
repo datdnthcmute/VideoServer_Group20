@@ -44,7 +44,7 @@ setup(
         'Framework :: Flask',
 
     ],
-    url='https://github.com/datdnthcmute/VideoServer_Group20.git',
+    url='https://github.com/superdesk/video-server',
     author='Oleg Pshenichniy, Petr Jašek, Loi Tran, Thanh Nguyen',
     author_email='oleg.pshenichniy@sourcefabric.org',
     license='GPLv3',
