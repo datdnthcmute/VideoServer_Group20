@@ -56,7 +56,7 @@ MONGO_URI = "mongodb://{host}:{port}/{dbname}".format(
 )
 
 #: rabbit-mq url
-RABBIT_MQ_URL = env('RABBIT_MQ_URL', 'pyamqp://guest:guest@localhost:5672//')
+RABBIT_MQ_URL = env('RABBIT_MQ_URL', 'pyamqp://guest@localhost:5672//')
 
 #: celery broker
 BROKER_URL = env('CELERY_BROKER_URL', RABBIT_MQ_URL)
