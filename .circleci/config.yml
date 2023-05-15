@@ -2,12 +2,13 @@ version: 2.1
 
 orbs:
   newman: postman/newman@1.0.0
+  docker: circleci/docker@2.2.0
 jobs:
   build:
-    docker:
-      - image: cimg/base:2023.03
+    executor: docker/machine
     steps:
       - checkout
+      - docker/check
       - run: echo "Mic Check! Mic Check! Mic Check!"
     executor: newman/postman-newman-docker
   test-video-server-app:
