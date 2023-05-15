@@ -6,22 +6,22 @@ jobs:
   build:
     docker:
       - image: cimg/base:2023.03
-    executor: newman/postman-newman-docker
     steps:
       - checkout
       - run: echo "Mic Check! Mic Check! Mic Check!"
+    executor: newman/postman-newman-docker
   test-video-server-app:
     docker:
       - image: cimg/python:3.7
     steps:
       - checkout
       - setup_remote_docker
-      - run: echo "Hello Python"
-          # name: Cài đặt pytest
-          # command: |
-          #   git clone https://github.com/superdesk/video-server.git
-          #   pip install -e video-server/[dev]
-          #   pip install pytest requests flask pymongo
+      - run:
+          name: Cài đặt pytest
+          command: |
+            git clone https://github.com/superdesk/video-server.git
+            pip install -e video-server/[dev]
+            pip install pytest requests flask pymongo
       # - run:
       #     name: Nhân bản project
       #     command: |
