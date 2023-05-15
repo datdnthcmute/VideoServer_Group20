@@ -4,13 +4,12 @@ orbs:
   newman: postman/newman@1.0.0
   docker: circleci/docker@2.2.0
 jobs:
-  build:
+  build-docker:
     executor: docker/machine
     steps:
       - checkout
       - docker/check
       - run: echo "Mic Check! Mic Check! Mic Check!"
-    executor: newman/postman-newman-docker
   test-video-server-app:
     docker:
       - image: cimg/python:3.7
@@ -40,7 +39,9 @@ jobs:
       #     command: |
       #       python -m pytest test_retrieve_project_details.py
 workflows:
-  build_and_test:
+  build-docker:
     jobs:
-      - build
+      - build-docker
+  test:
+    jobs:
       - test-video-server-app
