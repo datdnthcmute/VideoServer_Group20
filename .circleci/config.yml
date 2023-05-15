@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
+      - run: echo "Hello Python"
           name: Cài đặt pytest
           command: |
             git clone https://github.com/superdesk/video-server.git
