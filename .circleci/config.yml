@@ -7,9 +7,8 @@ jobs:
   build-docker:
     executor: docker/docker
     steps:
-      - run: 
-        echo "Docker Check! Docker Check! Docker Check!"
-        docker login -u $DOCKERHUB_LOGIN  -p $DOCKERHUB_PASSWORD
+     - run: |
+          docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
       - setup_remote_docker
       - checkout
       - docker/check:
