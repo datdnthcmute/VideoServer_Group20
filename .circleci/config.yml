@@ -5,11 +5,12 @@ orbs:
   docker: circleci/docker@2.2.0
 jobs:
   build-docker:
-    executor: docker/machine
+    executor: docker/docker
     steps:
+      - run: echo "Docker Check! Docker Check! Docker Check!"
+      - setup_remote_docker
       - checkout
       - docker/check
-      - run: echo "Mic Check! Mic Check! Mic Check!"
   test-video-server-app:
     docker:
       - image: cimg/python:3.7
