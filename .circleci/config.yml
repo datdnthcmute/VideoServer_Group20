@@ -15,13 +15,13 @@ jobs:
       - image: cimg/python:3.7
     steps:
       - checkout
-      - setup_remote_docker
+      # - setup_remote_docker
       - run: echo "Hello Python"
-          name: Cài đặt pytest
-          command: |
-            git clone https://github.com/superdesk/video-server.git
-            pip install -e video-server/[dev]
-            pip install pytest requests flask pymongo
+          # name: Cài đặt pytest
+          # command: |
+          #   git clone https://github.com/superdesk/video-server.git
+          #   pip install -e video-server/[dev]
+          #   pip install pytest requests flask pymongo
       # - run:
       #     name: Nhân bản project
       #     command: |
