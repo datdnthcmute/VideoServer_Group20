@@ -11,9 +11,7 @@ jobs:
       - checkout
       - run: |
           docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
-      - docker/check:
-          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
-          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
+      - docker/check
   test-video-server-app:
     docker:
       - image: cimg/python:3.7
