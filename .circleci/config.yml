@@ -9,7 +9,7 @@ jobs:
     executor: newman/postman-newman-docker
     steps:
       - checkout
-      - run: echo "!!!"
+      - run: echo "Mic Check! Mic Check! Mic Check!"
   test-video-server-app:
     docker:
       - image: cimg/python:3.7
