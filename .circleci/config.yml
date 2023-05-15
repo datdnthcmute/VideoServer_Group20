@@ -6,9 +6,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2023.03
-    steps:
-      - checkout
-      - run: echo "Mic Check! Mic Check! Mic Check!"
+      steps:
+        - checkout
+        - run: echo "Mic Check! Mic Check! Mic Check!"
     executor: newman/postman-newman-docker
   test-video-server-app:
     docker:
