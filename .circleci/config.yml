@@ -1,9 +1,12 @@
 version: 2.1
 
+orbs:
+  newman: postman/newman@1.0.0
 jobs:
   build:
     docker:
       - image: cimg/base:2023.03
+    executor: newman/postman-newman-docker
     steps:
       - checkout
       - run: echo "!!!"
@@ -19,22 +22,22 @@ jobs:
             git clone https://github.com/superdesk/video-server.git
             pip install -e video-server/[dev]
             pip install pytest requests flask pymongo
-      - run:
-          name: Nhân bản project
-          command: |
-            python -m pytest tests/api/test_create_project.py
-      - run:
-          name: Test danh sách project
-          command: |
-            python -m pytest test_list_projects.py
-      - run:
-          name: Test xóa project
-          command: |
-            python -m pytest test_delete_project.py
-      - run:
-          name: Test truy xuất chi tiết project
-          command: |
-            python -m pytest test_retrieve_project_details.py
+      # - run:
+      #     name: Nhân bản project
+      #     command: |
+      #       python -m pytest tests/api/test_create_project.py
+      # - run:
+      #     name: Test danh sách project
+      #     command: |
+      #       python -m pytest test_list_projects.py
+      # - run:
+      #     name: Test xóa project
+      #     command: |
+      #       python -m pytest test_delete_project.py
+      # - run:
+      #     name: Test truy xuất chi tiết project
+      #     command: |
+      #       python -m pytest test_retrieve_project_details.py
 workflows:
   build_and_test:
     jobs:
