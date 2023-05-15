@@ -39,6 +39,7 @@ jobs:
       #     command: |
       #       python -m pytest test_retrieve_project_details.py
 workflows:
-  build:
+  build_and_test:
     jobs:
+      - build
       - test-video-server-app
