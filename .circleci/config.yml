@@ -31,11 +31,6 @@ jobs:
               set -x
               docker-compose up -d
               docker ps
-    executor: newman/postman-newman-docker
-    steps:
-      - checkout
-      - run:
-          echo "Test API With Newman Start !!!"
       - newman/newman-run:
           collection: ./'Video Server API.postman_collection.json'
     
