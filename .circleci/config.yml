@@ -66,8 +66,12 @@ jobs:
           command: |
               npm install -g newman
               npm install -g newman-reporter-htmlextra
-              newman run ./'Video Server API.postman_collection.json'
-    
+      - run:
+          name: storing local IP address
+          command: node -p "require('ip').address()" > logs/ip.log
+      
+      - store_artifacts:
+          path: logs
 
 workflows:
   build-and-test-python:
