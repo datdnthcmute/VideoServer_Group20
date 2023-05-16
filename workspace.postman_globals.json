@@ -1,0 +1,45 @@
+{
+	"id": "c51f8fe7-3f91-4e66-8723-39a87ecb0779",
+	"values": [
+		{
+			"key": "orderId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "bookId",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idVideo",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idVideoDuplicate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idImage",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-05-16T11:36:31.583Z",
+	"_postman_exported_using": "Postman/10.13.5"
+}

@@ -42,9 +42,9 @@ jobs:
     
     - name: Run POSTMAN collection
       run: |
-        newman run 'Video Server API.postman_collection.json' --environment='Video Server API.postman_collection.json' -r htmlextra --reporter-htmlextra-export testResults/Video_Server_API-Report.html
+        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/Video_Server_API-Report.html
     
-    - name: Output the run Details
+    - name: Output the run Test API
       uses: actions/upload-artifact@v2
       with:
         name: APITestReport
