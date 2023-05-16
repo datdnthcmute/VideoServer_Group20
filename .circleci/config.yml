@@ -3,7 +3,7 @@ jobs:
   build-docker:
     docker:
       - image: cimg/base:2023.03
-     steps:
+    steps:
       - checkout
       - setup_remote_docker
       - run:
