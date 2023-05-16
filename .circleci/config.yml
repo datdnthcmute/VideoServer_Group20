@@ -42,5 +42,5 @@ jobs:
     steps:
       - checkout
       - newman/newman-run:
-          collection: ./Video Server API.postman_collection.json
+          collection: ./'Video Server API.postman_collection.json'
 
