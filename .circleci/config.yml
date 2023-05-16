@@ -15,8 +15,11 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run:
-          name: Build Service
-          command: make
+          name: Start Container and Verify It's Working 
+          command: |
+              set -x
+              docker-compose up -d
+              docker ps
 workflows:
   build-environment:
     jobs:
