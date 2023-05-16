@@ -51,7 +51,6 @@ jobs:
     docker:
       - image: cimg/node:20.1.0
     steps:
-      - checkout
       - install-docker-compose
       - run:
           name: Start Container and Verify It's Working 
