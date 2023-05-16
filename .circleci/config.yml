@@ -74,8 +74,8 @@ workflows:
   build-and-test-python:
     jobs:
       - install-package-python
-      - prepare-report-directory
-        requires:
+      - prepare-report-directory:
+          requires:
             - install-package-python
       - test-create-project:
           requires:
