@@ -1984,7 +1984,7 @@
 	"variable": [
 		{
 			"key": "VideoBaseURL",
-			"value": "http://27.71.26.121:5050",
+			"value": "http://redis:5050",
 			"type": "string"
 		}
 	]

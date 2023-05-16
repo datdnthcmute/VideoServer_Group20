@@ -72,11 +72,11 @@ jobs:
 workflows:
   build-and-test-python:
     jobs:
-      - prepare-report-directory
-      - test-create-project:
-          requires:
-            - prepare-report-directory
-      # - build-docker
-      # - start-container-and-test:
+      # - prepare-report-directory
+      # - test-create-project:
       #     requires:
-      #       - build-docker
+      #       - prepare-report-directory
+      - build-docker
+      - start-container-and-test:
+          requires:
+            - build-docker
