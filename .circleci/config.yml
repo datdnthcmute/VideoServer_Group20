@@ -6,6 +6,19 @@ commands:
       - run: 
           command: |
             pip install pytest requests opencv-python pytest-html flask
+  install-docker-compose:
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install Docker Compose
+          environment:
+            COMPOSE_VERSION: 'v2.17.3'
+          command: |
+            curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+            sudo systemctl start docker
 
 
 jobs:
@@ -32,25 +45,14 @@ jobs:
       - store_artifacts:
           path: test-results
 
-  build-docker:
-    docker:
-      - image: cimg/base:2023.03
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Install Docker Compose
-          environment:
-            COMPOSE_VERSION: 'v2.17.3'
-          command: |
-            curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+    
+
   start-container-and-test:
     docker:
       - image: cimg/node:20.1.0
     steps:
       - checkout
+      - install-docker-compose
       - setup_remote_docker
       - run:
           name: Start Container and Verify It's Working 
