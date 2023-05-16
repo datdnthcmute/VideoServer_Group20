@@ -41,5 +41,5 @@ jobs:
     executor: newman/postman-newman-docker
     steps:
       - checkout
-        collections: ./"Video Server API.postman_collection.json"
+        collections: ./'Video Server API.postman_collection.json'
 
