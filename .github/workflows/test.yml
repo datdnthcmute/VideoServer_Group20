@@ -24,13 +24,10 @@ jobs:
     - name: Check Containers
       run: docker ps
 
-    - name: Install node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-
-    - name: Install dependencies
-      run: npm install
+    - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
 
     - name: Install newman
       run: |
@@ -39,10 +36,11 @@ jobs:
 
     - name: Make Directory for results
       run: mkdir -p testResults
+
     
     - name: Run POSTMAN collection
       run: |
-        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/Video_Server_API-Report.html
+        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
     
     - name: Output the run Test API
       uses: actions/upload-artifact@v2
