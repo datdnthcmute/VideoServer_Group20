@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   newman: postman/newman@1.0.0
   docker: circleci/docker@2.2.0
-  python: circleci/python@1.0.0
+  python: circleci/python@2.0.3
 jobs:
   build-docker:
     executor: docker/docker
@@ -19,8 +19,8 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python/dist
-      - run: git clone https://github.com/superdesk/video-server.git && pip install -e video-server/[dev] && pip install pytest requests flask pymongo /*
+      - python/install-packages: pip pytest requests flask pymongo
+      # - run: git clone https://github.com/superdesk/video-server.git && pip install -e video-server/[dev] && pip install pytest requests flask pymongo /*
             
       # - run:
       #     name: Nhân bản project
