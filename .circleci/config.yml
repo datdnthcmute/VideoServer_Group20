@@ -78,7 +78,4 @@ workflows:
       # - test-create-project:
       #     requires:
       #       - prepare-report-directory
-      - build-docker
-      - start-container-and-test:
-          requires:
-            - build-docker
+      - start-container-and-test
