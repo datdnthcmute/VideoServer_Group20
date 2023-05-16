@@ -25,6 +25,8 @@ jobs:
       - run:
           name: Start Container and Verify It's Working 
           command: |
+              docker-compose down -v
+              docker system prune -a
               sudo apt-get update
               set -x
               docker-compose up -d
