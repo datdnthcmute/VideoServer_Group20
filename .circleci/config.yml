@@ -8,7 +8,6 @@ jobs:
       - checkout
       - run: 
           command: |
-            echo "!!!"
             pip install pytest requests opencv-python pytest-html 
 
   prepare-report-directory:
@@ -16,7 +15,7 @@ jobs:
       - image: cimg/python:3.7
     steps:
       - run:
-          name: Chuẩn bị cho báo cáo test
+          name: Report for Test
           command: |
             mkdir -p test-results
 
@@ -26,10 +25,11 @@ jobs:
       - image: cimg/python:3.7
     steps:
       - checkout
+      - install-package-python
       - run:
-          name: Test tạo project
+          name: Test Create Project
           command: |
-            python -m pytest test_create_project.py  -v -s --html=test-results/report.html
+            python -m pytest ./tests/api/test_create_project.py  -v -s --html=test-results/report.html
       - store_artifacts:
           path: test-results
 
@@ -73,10 +73,7 @@ jobs:
 workflows:
   build-and-test-python:
     jobs:
-      - install-package-python
-      - prepare-report-directory:
-          requires:
-            - install-package-python
+      - prepare-report-directory
       - test-create-project:
           requires:
             - prepare-report-directory
