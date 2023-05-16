@@ -14,26 +14,13 @@ jobs:
             curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      # - run:
-      #     name: Nhân bản project
-      #     command: |
-      #       python -m pytest tests/api/test_create_project.py
-      # - run:
-      #     name: Test danh sách project
-      #     command: |
-      #       python -m pytest test_list_projects.py
-      # - run:
-      #     name: Test xóa project
-      #     command: |
-      #       python -m pytest test_delete_project.py
-      # - run:
-      #     name: Test truy xuất chi tiết project
-      #     command: |
-      #       python -m pytest test_retrieve_project_details.py
+      - run:
+          name: Build Service
+          command: make
 workflows:
   build-environment:
     jobs:
-      - build-docker
+      - build-docker-compose
   # test:
   #   jobs:
   #     - test-video-server-app
