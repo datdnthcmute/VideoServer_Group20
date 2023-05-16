@@ -1,6 +1,5 @@
 version: 2.1
-orbs:
-  newman: postman/newman@1.0.0
+
 jobs:
   build-docker:
     docker:
@@ -18,8 +17,7 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
   start-container-and-test:
     docker:
-      - image: cimg/base:2023.03
-    executor: newman/postman-newman-docker
+      - image: cimg/node:20.1.0
     steps:
       - checkout
       - setup_remote_docker
@@ -32,8 +30,10 @@ jobs:
               set -x
               docker-compose up -d
               docker ps
-      - newman/newman-run:
-          collection: ./'Video Server API.postman_collection.json'
+      - run:
+          name: Install Node
+          command: |
+              node --version
     
 
 workflows:
