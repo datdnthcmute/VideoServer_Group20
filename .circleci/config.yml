@@ -5,7 +5,7 @@ commands:
       - checkout
       - run: 
           command: |
-            pip install pytest requests opencv-python pytest-html
+            pip install pytest requests opencv-python pytest-html flask
 
 
 jobs:
