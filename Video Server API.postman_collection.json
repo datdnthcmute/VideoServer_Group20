@@ -3,7 +3,8 @@
 		"_postman_id": "5596bb92-b8c7-4134-af67-d2ed604ebae2",
 		"name": "Video Server API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26385262"
+		"_exporter_id": "26385262",
+		"_collection_link": "https://grey-escape-627582.postman.co/workspace/My-Workspace~7de5bc83-fa36-41d9-8b37-2b984274c326/collection/26385262-5596bb92-b8c7-4134-af67-d2ed604ebae2?action=share&creator=26385262&source=collection_link"
 	},
 	"item": [
 		{
@@ -82,7 +83,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/dntda/Videos/2023-02-17 15-08-12.mp4"
+							"src": "/C:/Users/dntda/Videos/2023-02-28 10-42-30.mp4"
 						}
 					]
 				},
@@ -304,7 +305,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/dntda/Videos/2023-02-17 15-08-12.mp4"
+							"src": "/C:/Users/dntda/Videos/2023-02-28 10-42-30.mp4"
 						}
 					]
 				},
@@ -457,7 +458,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"trim\": \"5,7\"\r\n}",
+					"raw": "{\r\n  \"trim\": \"4,7\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1674,7 +1675,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Upload a custom image preview thumbnails FILE NOT FOUND\", function () {\r",
-							"    pm.response.to.have.status(500);\r",
+							"    pm.response.to.have.status(400);\r",
 							"});\r",
 							""
 						],
@@ -1891,14 +1892,14 @@
 			"response": []
 		},
 		{
-			"name": "Get timeline thumbnail file SUCCESS",
+			"name": "Get timeline thumbnail file ERROR",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"pm.test(\"Get timeline SUCCESS\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.status(404);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -1909,7 +1910,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/thumbnails/timeline/10/1",
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/thumbnails/timeline/1",
 					"host": [
 						"{{VideoBaseURL}}"
 					],
@@ -1919,7 +1920,6 @@
 						"raw",
 						"thumbnails",
 						"timeline",
-						"10",
 						"1"
 					]
 				}
