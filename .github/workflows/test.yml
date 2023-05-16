@@ -20,3 +20,7 @@ jobs:
     - name: Start Containers
       run: docker-compose -f "docker-compose.yml" up -d --build
 
+  check-container:
+    - name: Check Containers
+      run: docker ps
+
