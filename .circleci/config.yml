@@ -5,10 +5,12 @@ workflows:
   build-and-test:
     jobs:
       - build-docker
-      # - start-container:
-      #     requires:
-      #       - build-docker
+      - start-container:
+          requires:
+            - build-docker
       - test-newman
+          requires:
+            - start-container
 
 jobs:
   build-docker:
