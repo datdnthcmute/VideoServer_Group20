@@ -5,11 +5,7 @@ jobs:
       - image: cimg/base:2023.03
     steps:
       - checkout
-      - setup_remote_docker
-      - run:
-          name: Install dependencies
-          command: |
-            pip install docker-compose
+      - echo "!!!"
             
       # - run:
       #     name: Nhân bản project
