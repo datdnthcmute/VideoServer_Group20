@@ -27,10 +27,6 @@ jobs:
             git clone https://github.com/superdesk/video-server.git 
             pip install -e video-server/[dev] 
             pip install pytest requests flask pymongo
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
             
       # - run:
       #     name: Nhân bản project
