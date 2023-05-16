@@ -21,12 +21,6 @@ jobs:
     - name: Start Containers
       run: docker-compose -f "docker-compose.yml" up -d --build
 
-  check-container:
-    name: Check Docker Container Started
-    needs: docker-compose
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Check Containers
       run: docker ps
 
