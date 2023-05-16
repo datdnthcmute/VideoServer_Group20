@@ -24,8 +24,8 @@ jobs:
         name: Cài đặt pytest
         command: |
           git clone https://github.com/superdesk/video-server.git
-          pip install -e video-server/[dev]
-          pip install pytest requests flask pymongo
+          && pip install -e video-server/[dev]
+          && pip install pytest requests flask pymongo /*
             
       # - run:
       #     name: Nhân bản project
@@ -44,9 +44,10 @@ jobs:
       #     command: |
       #       python -m pytest test_retrieve_project_details.py
 workflows:
-  build-docker:
+  build-environment:
     jobs:
       - build-docker
-  test:
-    jobs:
-      - test-video-server-app
+      - build-python
+  # test:
+  #   jobs:
+  #     - test-video-server-app
