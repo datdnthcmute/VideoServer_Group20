@@ -1,13 +1,13 @@
 version: 2.1
 commands:
-install-package-python:
-  docker:
-    - image: cimg/python:3.7
-  steps:
-    - checkout
-    - run: 
-        command: |
-          pip install pytest requests opencv-python pytest-html
+  install-package-python:
+    docker:
+      - image: cimg/python:3.7
+    steps:
+      - checkout
+      - run: 
+          command: |
+            pip install pytest requests opencv-python pytest-html
 
 
 jobs:
