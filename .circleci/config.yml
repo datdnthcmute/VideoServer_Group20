@@ -19,7 +19,8 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python/install-packages: pip pytest requests flask pymongo
+      - python/install-packages: 
+        pkg-manager: pip pytest requests flask pymongo
       # - run: git clone https://github.com/superdesk/video-server.git && pip install -e video-server/[dev] && pip install pytest requests flask pymongo /*
             
       # - run:
