@@ -20,12 +20,7 @@ jobs:
     steps:
       - checkout
       - python/dist
-      - run:
-        name: Cài đặt pytest
-        command: |
-          git clone https://github.com/superdesk/video-server.git
-          && pip install -e video-server/[dev]
-          && pip install pytest requests flask pymongo /*
+      - run: | git clone https://github.com/superdesk/video-server.git && pip install -e video-server/[dev] && pip install pytest requests flask pymongo /*
             
       # - run:
       #     name: Nhân bản project
