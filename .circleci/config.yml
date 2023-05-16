@@ -25,6 +25,7 @@ jobs:
       - run:
           name: Start Container and Verify It's Working 
           command: |
+              sudo apt-get update
               set -x
               docker-compose up -d
               docker ps
@@ -34,7 +35,7 @@ jobs:
       - checkout
       - newman/newman-run:
           collection: ./'Video Server API.postman_collection.json'
-          
+
 workflows:
   build-and-test:
     jobs:
