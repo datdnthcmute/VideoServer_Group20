@@ -1,16 +1,6 @@
 version: 2.1
 orbs:
   newman: postman/newman@1.0.0
-workflows:
-  build-and-test:
-    jobs:
-      - build-docker
-      - start-container:
-          requires:
-            - build-docker
-      - test-newman
-          requires:
-            - start-container
 jobs:
   build-docker:
     docker:
@@ -44,4 +34,13 @@ jobs:
       - checkout
       - newman/newman-run:
           collection: ./'Video Server API.postman_collection.json'
-
+workflows:
+  build-and-test:
+    jobs:
+      - build-docker
+      - start-container:
+          requires:
+            - build-docker
+      - test-newman
+          requires:
+            - start-container
