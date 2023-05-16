@@ -18,7 +18,6 @@ jobs:
   build-python:
     executor: python/default
     steps:
-      steps:
       - checkout # checkout source code
       - python/install-packages:
           pkg-manager: pip
