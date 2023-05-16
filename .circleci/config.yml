@@ -33,7 +33,9 @@ jobs:
       - run:
           name: Install Node
           command: |
-              node --version
+              npm install -g newman
+              npm install -g newman-reporter-htmlextra
+              newman run ./'Video Server API.postman_collection.json'
     
 
 workflows:
