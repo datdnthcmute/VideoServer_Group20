@@ -41,6 +41,6 @@ workflows:
       - start-container:
           requires:
             - build-docker
-      - test-newman
+      - test-newman:
           requires:
             - start-container
