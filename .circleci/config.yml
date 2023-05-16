@@ -1,32 +1,16 @@
 version: 2.1
-
-orbs:
-  newman: postman/newman@1.0.0
-  docker: circleci/docker@2.2.0
-  python: circleci/python@2.0.3
 jobs:
   build-docker:
-    executor: docker/docker
+    working_directory: /videoserver_group20
+    docker:
+      - image: cimg/base:2023.03
     steps:
-      - setup_remote_docker
       - checkout
-      - run: |
-          docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
-      - docker/check:
-          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
-          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
-  build-python:
-    executor: python/default
-    steps:
-      - checkout # checkout source code
-      - python/install-packages:
-          pkg-manager: pip
+      - setup_remote_docker
       - run:
-          name: Intall video-server
-          command: 
-            git clone https://github.com/superdesk/video-server.git 
-            pip install -e video-server/[dev] 
-            pip install pytest requests flask pymongo
+        name: Install Dependencies
+        command: |
+          pip install docker-compose
             
       # - run:
       #     name: Nhân bản project
@@ -48,7 +32,6 @@ workflows:
   build-environment:
     jobs:
       - build-docker
-      - build-python
   # test:
   #   jobs:
   #     - test-video-server-app

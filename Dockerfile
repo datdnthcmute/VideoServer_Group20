@@ -11,6 +11,7 @@ python3 python3-dev python3-pip python3-setuptools python3-wheel
 WORKDIR /opt/video-server-app
 COPY ./ /opt/video-server-app
 RUN pip3 install -r requirements.txt
+RUN pip3 install -e .
 
 # run
 ENTRYPOINT ["honcho"]
