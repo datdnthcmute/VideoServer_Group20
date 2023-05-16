@@ -32,5 +32,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm run test
+    - name: Install newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+    - name: Make Directory for results
+      run: mkdir -p testResults
