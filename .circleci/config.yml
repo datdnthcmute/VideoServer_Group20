@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Test Create Project
           command: |
-            python -m pytest ./tests/api/test_create_project.py  -v -s --html=test-results/report.html
+            python -m pytest test_create_project.py  -v -s --html=test-results/report.html
       - store_artifacts:
           path: test-results
 
