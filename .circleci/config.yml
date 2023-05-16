@@ -1,15 +1,16 @@
 version: 2.1
+commands:
+install-package-python:
+  docker:
+    - image: cimg/python:3.7
+  steps:
+    - checkout
+    - run: 
+        command: |
+          pip install pytest requests opencv-python pytest-html
+
 
 jobs:
-  install-package-python:
-    docker:
-      - image: cimg/python:3.7
-    steps:
-      - checkout
-      - run: 
-          command: |
-            pip install pytest requests opencv-python pytest-html 
-
   prepare-report-directory:
     docker:
       - image: cimg/python:3.7
@@ -73,10 +74,7 @@ jobs:
 workflows:
   build-and-test-python:
     jobs:
-      - install-package-python
-      - prepare-report-directory:
-          requires:
-            - install-package-python
+      - prepare-report-directory
       - test-create-project:
           requires:
             - prepare-report-directory
