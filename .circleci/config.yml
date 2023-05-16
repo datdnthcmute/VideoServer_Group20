@@ -4,13 +4,14 @@ jobs:
     working_directory: /videoserver_group20
     docker:
       - image: cimg/base:2023.03
-    steps:
+     steps:
       - checkout
       - setup_remote_docker
       - run:
-        name: Install Dependencies
-        command: |
-          pip install docker-compose
+          name: Install dependencies
+          command: |
+            apk add --no-cache py-pip=9.0.0-r1
+            pip install docker-compose==1.15.0
             
       # - run:
       #     name: Nhân bản project
