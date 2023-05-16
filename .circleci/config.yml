@@ -1,8 +1,6 @@
 version: 2.1
 commands:
   install-package-python:
-    docker:
-      - image: cimg/python:3.7
     steps:
       - checkout
       - run: 
