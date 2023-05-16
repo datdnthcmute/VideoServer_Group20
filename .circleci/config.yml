@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Report for Test
           command: |
-            mkdir -p test-results
+            mkdir -p log
 
 
   test-create-project:
@@ -80,4 +80,5 @@ workflows:
       # - test-create-project:
       #     requires:
       #       - prepare-report-directory
+      - prepare-report-directory
       - start-container-and-test
