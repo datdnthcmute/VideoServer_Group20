@@ -18,12 +18,17 @@ jobs:
   build-python:
     executor: python/default
     steps:
-      - checkout
+      steps:
+      - checkout # checkout source code
       - python/install-packages:
           pkg-manager: pip
-      - run: 
-        name: Install video-server
-        command: pip install -r requirements.txt
+      - run:
+          name: Intall video-server
+          command: pip install -r requirements.txt
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
             
       # - run:
       #     name: Nhân bản project
