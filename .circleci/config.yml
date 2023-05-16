@@ -1,4 +1,13 @@
 version: 2.1
+
+workflows:
+  build-environment:
+    jobs:
+      - build-docker
+      - start-container:
+        requires:
+          - build-docker
+
 jobs:
   build-docker:
     docker:
@@ -14,16 +23,15 @@ jobs:
             curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
+  start-container:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - setup_remote_docker
       - run:
           name: Start Container and Verify It's Working 
           command: |
               set -x
               docker-compose up -d
               docker ps
-workflows:
-  build-environment:
-    jobs:
-      - build-docker
-  # test:
-  #   jobs:
-  #     - test-video-server-app
