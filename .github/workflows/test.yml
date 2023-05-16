@@ -39,3 +39,13 @@ jobs:
 
     - name: Make Directory for results
       run: mkdir -p testResults
+    
+    - name: Run POSTMAN collection
+      run: |
+        newman run 'Video Server API.postman_collection.json' --environment='Video Server API.postman_collection.json' -r htmlextra --reporter-htmlextra-export testResults/Video_Server_API-Report.html
+    
+    - name: Output the run Details
+      uses: actions/upload-artifact@v2
+      with:
+        name: APITestReport
+        path: testResults
