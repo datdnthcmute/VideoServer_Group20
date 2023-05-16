@@ -5,30 +5,34 @@ jobs:
     docker:
       - image: cimg/base:2023.03
     steps:
-      - run:
-          name: Install Python Package
+      - checkout
+      - run: 
           command: |
-            pip install pytest requests pytest-html
-    prepare-report-directory:
-      docker:
-        - image: cimg/python:3.7
-      steps:
-        - run:
-            name: Test Report
-            command: |
-              mkdir -p test-results
-    test-create-project:
-      docker:
-        - image: cimg/python:3.7
-      steps:
-        - checkout
-        - install_package_python
-        - run:
-            name: Test tạo project
-            command: |
-              python -m pytest test_create_project.py  -v -s --html=test-results/report.html
-        - store_artifacts:
-            path: test-results
+            echo "!!!"
+            pip install pytest requests opencv-python pytest-html 
+
+  prepare-report-directory:
+    docker:
+      - image: cimg/python:3.7
+    steps:
+      - run:
+          name: Chuẩn bị cho báo cáo test
+          command: |
+            mkdir -p test-results
+
+
+  test-create-project:
+    docker:
+      - image: cimg/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Test tạo project
+          command: |
+            python -m pytest test_create_project.py  -v -s --html=test-results/report.html
+      - store_artifacts:
+          path: test-results
+
   build-docker:
     docker:
       - image: cimg/base:2023.03
@@ -72,7 +76,7 @@ workflows:
       - install-package-python
       - prepare-report-directory:
           requires:
-            - build
+            - install-package-python
       - test-create-project:
           requires:
             - prepare-report-directory
