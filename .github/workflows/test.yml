@@ -1,4 +1,4 @@
-name: Pytest
+name: Docker-Compose
 
 on:
   push:
@@ -9,11 +9,14 @@ on:
 permissions: read-all
 
 jobs:
-  docker:
+  docker-compose:
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v1
+    
+    - name: Start Containers
+      run: docker-compose -f "docker-compose.yml" up -d --build
 
