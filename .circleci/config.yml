@@ -5,7 +5,7 @@ jobs:
       - image: cimg/base:2023.03
     steps:
       - checkout
-      - echo "!!!"
+      - run: echo "!!!"
             
       # - run:
       #     name: Nhân bản project
