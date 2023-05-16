@@ -1,0 +1,3 @@
+git clone https://github.com/superdesk/video-server.git 
+pip install -e video-server/[dev] 
+pip install pytest requests flask pymongo
