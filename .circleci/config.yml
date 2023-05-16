@@ -4,9 +4,9 @@ workflows:
   build-and-test:
     jobs:
       - build-docker
-      - start-container
-      #   requires:
-      #     - build-docker
+      - start-container:
+          requires:
+            - build-docker
 
 jobs:
   build-docker:
