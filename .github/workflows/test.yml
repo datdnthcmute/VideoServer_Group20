@@ -23,6 +23,7 @@ jobs:
 
   check-container:
     name: Check Docker Container Started
+    needs: docker-compose
     runs-on: ubuntu-latest
 
     steps:
