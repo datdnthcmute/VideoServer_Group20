@@ -5,12 +5,6 @@ jobs:
       - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: echo "!!!"
-  build-docker-compose:
-    docker:
-      - image: cimg/base:2023.03
-    steps:
-      - checkout
       - setup_remote_docker
       - run:
           name: Install Docker Compose
@@ -40,7 +34,6 @@ workflows:
   build-environment:
     jobs:
       - build-docker
-      - build-docker-compose
   # test:
   #   jobs:
   #     - test-video-server-app
