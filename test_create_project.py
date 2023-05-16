@@ -17,7 +17,7 @@ class TestCreateProject(TestBase):
             3. Xóa project
         """
         # tạo project
-        resp = self.create_project('test_data/p-01.mp4')
+        resp = self.create_project('./test_data/p-01.mp4')
         _id = resp['_id']
         print(f'1. created {_id}')
 
@@ -45,7 +45,7 @@ class TestCreateProject(TestBase):
             3. Xóa project
         """
         # tạo project
-        resp = self.create_project('test_data/p-02.mp4')
+        resp = self.create_project('./test_data/p-02.mp4')
         _id = resp['_id']
         print(f'1. created {_id}')
 
@@ -73,7 +73,7 @@ class TestCreateProject(TestBase):
             3. Xóa project
         """
         # tạo project
-        resp = self.create_project('test_data/p-03.mp4')
+        resp = self.create_project('./test_data/p-03.mp4')
         _id = resp['_id']
         print(f'1. created {_id}')
 
@@ -101,7 +101,7 @@ class TestCreateProject(TestBase):
             3. Xóa project
         """
         # tạo project
-        resp = self.create_project('test_data/p-04.mp4')
+        resp = self.create_project('./test_data/p-04.mp4')
         _id = resp['_id']
         print(f'1. created {_id}')
 
@@ -129,7 +129,7 @@ class TestCreateProject(TestBase):
             3. Xóa project
         """
         # tạo project
-        resp = self.create_project('test_data/p-05.mp4')
+        resp = self.create_project('./test_data/p-05.mp4')
         _id = resp['_id']
         print(f'1. created {_id}')
 
