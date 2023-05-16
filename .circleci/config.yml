@@ -20,7 +20,7 @@ jobs:
 workflows:
   build-environment:
     jobs:
-      - build-docker-compose
+      - build-docker
   # test:
   #   jobs:
   #     - test-video-server-app
