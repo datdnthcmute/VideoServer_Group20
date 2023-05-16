@@ -53,7 +53,6 @@ jobs:
     steps:
       - checkout
       - install-docker-compose
-      - setup_remote_docker
       - run:
           name: Start Container and Verify It's Working 
           command: |
