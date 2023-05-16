@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   newman: postman/newman@1.0.0
   docker: circleci/docker@2.2.0
+  python: circleci/python@1.0.0
 jobs:
   build-docker:
     executor: docker/docker
@@ -14,18 +15,18 @@ jobs:
       - docker/check:
           docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
           docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
-  test-video-server-app:
-    docker:
-      - image: cimg/python:3.7
+  build-python:
+    executor: python/default
     steps:
       - checkout
-      - setup_remote_docker
+      - python/dist
       - run:
-          name: Cài đặt pytest
-          command: |
-            git clone https://github.com/superdesk/video-server.git
-            pip install -e video-server/[dev]
-            pip install pytest requests flask pymongo
+        name: Cài đặt pytest
+        command: |
+          git clone https://github.com/superdesk/video-server.git
+          pip install -e video-server/[dev]
+          pip install pytest requests flask pymongo
+            
       # - run:
       #     name: Nhân bản project
       #     command: |
