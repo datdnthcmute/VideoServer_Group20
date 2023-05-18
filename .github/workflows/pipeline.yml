@@ -64,7 +64,7 @@ jobs:
           script: |
           
             if [ -d "VideoServer_Group20" ]; then
-              cd Nhom01-DeTai01-Label-Studio
+              cd VideoServer_Group20
               git pull https://github.com/datdnthcmute/VideoServer_Group20.git 
               wait
               cd ../
