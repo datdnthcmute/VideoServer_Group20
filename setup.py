@@ -5,7 +5,7 @@ requirements = (
     'flask>=1.0.2',
     'flask-swagger==0.2.14',
     'Flask-PyMongo==2.2.0',
-    'celery==5.2.0b1',
+    'celery>=4.3,<5.0.0',
     'kombu==4.6.11',
     'pytz>=2015.4',
     'pymongo>=3.7.2',
