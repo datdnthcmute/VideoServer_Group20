@@ -1,5 +1,5 @@
 # VideoServer_Group20 
-# [HTTP API video server](https://github.com/datdnthcmute/VideoServer_Group20) nhóm 20  
+[HTTP API video server](https://github.com/datdnthcmute/VideoServer_Group20) nhóm 20  
 Link source code tham khảo: https://github.com/superdesk/video-server
 
 <b><i>GVHD: TS. Huỳnh Xuân Phụng</i></b>
