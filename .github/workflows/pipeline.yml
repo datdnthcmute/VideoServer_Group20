@@ -71,7 +71,9 @@ jobs:
             else
               sudo su
               sudo yum update -y
-              sudo yum install git
+              wait
+              sudo yum install -y git
+              wait
               git clone https://github.com/datdnthcmute/VideoServer_Group20.git 
               wait
             fi
