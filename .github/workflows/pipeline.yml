@@ -50,7 +50,7 @@ jobs:
 
   config:
     name: Config Environment AWS EC2
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
