@@ -160,3 +160,4 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           docker ps
+          
