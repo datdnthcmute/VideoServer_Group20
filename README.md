@@ -1,6 +1,8 @@
-# VideoServer_Group20
+# VideoServer_Group20 
+[HTTP API video server](https://github.com/datdnthcmute/VideoServer_Group20) nhóm 20  
 Link source code tham khảo: https://github.com/superdesk/video-server
 
+<b><i>GVHD: TS. Huỳnh Xuân Phụng</i></b>
 ## Thành viên nhóm
 - Nguyễn Thị Bích Liên - 20110335
 - Đặng Nguyễn Thiên Đạt - 20110629
@@ -36,3 +38,29 @@ _Máy chủ video bao gồm hai phần chính: http api và celery workers._
 > set FLASK_ENV=developement
 
 2. Chạy `python -m videoserver.app`
+
+## Chạy với Docker
+ 
+#### Sử dụng Docker-compose
+
+Đầu tiên sử dụng git clone đồ án của nhóm về:
+```sh
+git clone https://github.com/datdnthcmute/VideoServer_Group20
+cd VideoServer_Group20
+```
+Tiến hành chạy docker-compose để tạo container:
+```sh
+docker-compose up -d
+```
+
+
+> Lưu ý:  
+ Khi chạy với docker compose mọi yêu cầu dịch vụ như trên FFmpeg, MongoDB, RabbitMQ sẽ không được yêu cầu tải trên localhost mà sẽ được tải tự động vào container của docker.
+
+
+### Superdesk
+
+Bản quyền thuộc về Superdesk việc sử dụng ở đây chỉ dành cho mục đích học tập 
+
+To use a video-server with a [Superdesk](https://github.com/superdesk/superdesk-core) see the [docs](https://github.com/superdesk/superdesk-core/blob/develop/docs/video_server.rst)
+
