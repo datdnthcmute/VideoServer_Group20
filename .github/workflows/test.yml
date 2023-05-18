@@ -10,7 +10,7 @@ permissions: read-all
 
 jobs:
   docker-compose:
-    name: Start Docker Compose
+    name: Build-and-Test
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
