@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
     
     - name: Start Containers
       run: docker-compose -f "docker-compose.yml" up -d --build
@@ -25,9 +25,9 @@ jobs:
       run: docker ps
 
     - name: Install Node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
-        node-version: "12.x"
+        node-version: "16.x"
 
     - name: Install newman
       run: |
@@ -43,7 +43,7 @@ jobs:
         newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
     
     - name: Output the run Test API
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: APITestReport
         path: testResults
