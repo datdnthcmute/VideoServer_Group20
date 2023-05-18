@@ -45,7 +45,8 @@ _Máy chủ video bao gồm hai phần chính: http api và celery workers._
 
 Đầu tiên sử dụng git clone đồ án của nhóm về:
 ```sh
-git clone https://github.com/datdnthcmute/VideoServer_Docker
+git clone https://github.com/datdnthcmute/VideoServer_Group20
+cd VideoServer_Group20
 ```
 Tiến hành chạy docker-compose để tạo container:
 ```sh
