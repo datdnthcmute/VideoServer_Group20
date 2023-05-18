@@ -5,12 +5,12 @@ requirements = (
     'flask>=1.0.2',
     'flask-swagger==0.2.14',
     'Flask-PyMongo==2.2.0',
-    'celery>=4.3,<5.0.0',
+    'celery==5.2.2',
     'kombu==4.6.11',
     'pytz>=2015.4',
     'pymongo>=3.7.2',
     'cerberus==1.2',
-    'PyYAML==5.1'
+    'PyYAML==5.4'
 )
 
 dev_requirements = (

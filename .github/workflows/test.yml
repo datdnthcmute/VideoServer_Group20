@@ -1,4 +1,4 @@
-name: Docker-Compose
+name: Build-And-Test
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 permissions: read-all
 
 jobs:
-  docker-compose:
+  build-and-test:
     name: Build-and-Test
     timeout-minutes: 10
     runs-on: ubuntu-latest
