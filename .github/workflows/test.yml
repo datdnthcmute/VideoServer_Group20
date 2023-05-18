@@ -2,9 +2,9 @@ name: Docker-Compose
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "datdnthcmute" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "datdnthcmute" ]
 
 permissions: read-all
 
