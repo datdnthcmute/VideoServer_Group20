@@ -49,7 +49,7 @@ jobs:
   #       path: testResults
 
   config:
-    name: Config AWS EC2
+    name: Config Environment AWS EC2
     runs-on: ubuntu-lastest
     steps:
       - name: Checkout Code
