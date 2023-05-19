@@ -65,6 +65,7 @@ jobs:
               git clone https://github.com/datdnthcmute/VideoServer_Group20.git
               wait
             fi
+            
   stop-old-container:
     name: Stop Already Container
     runs-on: ubuntu-latest
