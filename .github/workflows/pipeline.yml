@@ -125,31 +125,23 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          if [ -d "VideoServer_Group20" ]; then
-            sudo su
-            sudo chmod 666 /var/run/docker.sock
-            cd VideoServer_Group20
-            docker-compose up -d
-            wait
-            cd ../
-          else
-            sudo su
-            sudo chmod 666 /var/run/docker.sock
-            sudo yum install -y docker
-            wait
-            curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-            wait
-            sudo chmod +x /usr/local/bin/docker-compose
-            wait
-            sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-            wait
-            systemctl start docker
-            wait
-            cd VideoServer_Group20
-            docker-compose up -d
-            wait
-            cd ../
-          fi
+          sudo su
+          sudo yum install -y docker
+          wait
+          curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          wait
+          sudo chmod +x /usr/local/bin/docker-compose
+          wait
+          sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+          wait
+          systemctl start docker
+          wait
+          sudo chmod 666 /var/run/docker.sock
+          wait
+          cd VideoServer_Group20
+          docker-compose up -d
+          wait
+          cd ../
   
   check-deploy:
     name: Check Deploy Is Success
