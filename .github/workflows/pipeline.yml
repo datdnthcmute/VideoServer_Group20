@@ -126,7 +126,6 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           sudo su
-          cd VideoServer_Group20
           sudo yum update -y
           wait
           sudo yum install docker
@@ -135,10 +134,11 @@ jobs:
           wait
           sudo systemctl enable docker
           wait
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
           wait
           sudo chmod +x /usr/local/bin/docker-compose
           wait
+          cd VideoServer_Group20
           sudo docker-compose up -d --build
           wait
           cd ../
