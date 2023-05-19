@@ -2,9 +2,9 @@ name: Build-And-Test
 
 on:
   push:
-    branches: [ "datdnthcmute" ]
+    branches: [ "bichlien" ]
   pull_request:
-    branches: [ "datdnthcmute" ]
+    branches: [ "bichlien" ]
 
 permissions: read-all
 
