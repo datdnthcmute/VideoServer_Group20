@@ -136,13 +136,13 @@ jobs:
           wait
           curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
           wait
-          sudo chmod +x /usr/local/bin/docker-compose
-          wait
           sudo usermod -aG docker $(whoami)
           wait
           sudo chgrp docker /usr/local/bin/docker-compose
           wait
           sudo chmod 750 /usr/local/bin/docker-compose 
+          wait
+          sudo chmod +x /usr/local/bin/docker-compose
           wait
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           wait
