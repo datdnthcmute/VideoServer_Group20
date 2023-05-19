@@ -126,6 +126,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           sudo su
+          wait
           sudo yum install -y docker
           wait
           curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
@@ -134,7 +135,7 @@ jobs:
           wait
           sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
           wait
-          systemctl start docker
+          sudo systemctl start docker
           wait
           sudo chmod 666 /var/run/docker.sock
           wait
