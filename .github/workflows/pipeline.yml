@@ -92,8 +92,10 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           sudo su
+          cd VideoServer_Group20
           docker-compose down -v
           wait
+          cd ../
 
   remove-old-container:
     name: Remove Already Container
