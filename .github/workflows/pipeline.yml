@@ -134,9 +134,9 @@ jobs:
           wait
           sudo systemctl enable docker
           wait
-          curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-          wait
-          sudo chmod +x /usr/local/bin/docker-compose
+          curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+          chmod +x ~/docker-compose
+          sudo mv ~/docker-compose /usr/local/bin/docker-compose
           wait
           cd VideoServer_Group20
           sudo docker-compose up -d --build
