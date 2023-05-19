@@ -125,24 +125,27 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          sudo su
+          sudo yum update -y
           wait
           sudo yum install -y docker
           wait
-          curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-          wait
-          sudo chmod +x /usr/local/bin/docker-compose
-          wait
-          sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-          wait
           sudo systemctl start docker
+          wait
+          sudo systemctl enable docker
+          wait
+          sudo usermod -aG docker $USER
           wait
           sudo chmod 666 /var/run/docker.sock
           wait
-          cd VideoServer_Group20
-          docker-compose up -d
+          sudo curl -SL https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
           wait
-          cd ../
+          sudo chmod +x /usr/local/bin/docker-compose
+          wait
+          cd VideoServer_Group20s
+          wait
+          sudo docker-compose up -d
+          wait
+          cd ..
   
   check-deploy:
     name: Check Deploy Is Success
