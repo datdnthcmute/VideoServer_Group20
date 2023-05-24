@@ -124,7 +124,7 @@ jobs:
           wait
           sudo yum install docker
           sudo usermod -a -G docker $USER
-          id ec2-user
+          id $USER
           newgrp docker
           wait
           sudo systemctl enable docker
