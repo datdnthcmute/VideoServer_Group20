@@ -8,54 +8,6 @@
 	},
 	"item": [
 		{
-			"name": "Create a project SUCCESS",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"if(pm.response.to.have.status(201)){\r",
-							"    pm.test(\"Upload Success\", function () {\r",
-							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
-							"    });\r",
-							"}\r",
-							"pm.globals.set(\"idVideo\", response._id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "./test_data/video5.mp4"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Create a project ERROR",
 			"event": [
 				{
@@ -135,6 +87,54 @@
 					"path": [
 						"projects",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var response = pm.response.json();\r",
+							"\r",
+							"if(pm.response.to.have.status(201)){\r",
+							"    pm.test(\"Upload Success\", function () {\r",
+							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.set(\"idVideo\", response._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test_data/video5.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects"
 					]
 				}
 			},
