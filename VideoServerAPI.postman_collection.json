@@ -20,6 +20,7 @@
 							"\r",
 							"var response = pm.response.json();\r",
 							"\r",
+							"\r",
 							"if(response._items.length > 0 && response._meta.total > 0){\r",
 							"    pm.test(\"The project has video list\", function () {\r",
 							"        pm.expect(response._meta.total).to.above(0);\r",
@@ -30,7 +31,7 @@
 							"    pm.test(\"The project don't has video list\", () =>{\r",
 							"        pm.expect(response._meta.total).to.equal(0);\r",
 							"        pm.expect(response._items.length).to.equal(0);\r",
-							"    })\r",
+							"    });\r",
 							"}"
 						],
 						"type": "text/javascript"
@@ -53,6 +54,96 @@
 			"response": []
 		},
 		{
+			"name": "List all projects GET PAGE SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"if(response._items.length > 0 && response._meta.total > 0){\r",
+							"    pm.test(\"The project has video list\", function () {\r",
+							"        pm.expect(response._meta.total).to.above(0);\r",
+							"        pm.expect(response._items.length).to.above(0);\r",
+							"    });\r",
+							"}\r",
+							"else{\r",
+							"    pm.test(\"The project don't has video list\", () =>{\r",
+							"        pm.expect(response._meta.total).to.equal(0);\r",
+							"        pm.expect(response._items.length).to.equal(0);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/?page=1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all projects GET PAGE FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/?page=0",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create a project SUCCESS",
 			"event": [
 				{
@@ -62,7 +153,8 @@
 							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
-							"var response = pm.response.json()\r",
+							"var response = pm.response.json();\r",
+							"\r",
 							"if(pm.response.to.have.status(201)){\r",
 							"    pm.test(\"Upload Success\", function () {\r",
 							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
@@ -88,13 +180,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{VideoBaseURL}}/projects/",
+					"raw": "{{VideoBaseURL}}/projects",
 					"host": [
 						"{{VideoBaseURL}}"
 					],
 					"path": [
-						"projects",
-						""
+						"projects"
 					]
 				}
 			},
@@ -144,16 +235,15 @@
 			"response": []
 		},
 		{
-			"name": "Retrieve project details FOUND",
+			"name": "Create a project REQUEST MP4",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Retrieve project details FOUND\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Upload Fail status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
 							"});\r",
-							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -161,49 +251,26 @@
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}"
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test_data/music1.mp3"
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Retrieve project details NOT FOUND",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Retrieve project details NOT FOUND\", () => {\r",
-							"    pm.response.to.have.status(404);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
+				},
 				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
+					"raw": "{{VideoBaseURL}}/projects/",
 					"host": [
 						"{{VideoBaseURL}}"
 					],
 					"path": [
 						"projects",
-						"1"
+						""
 					]
 				}
 			},
@@ -276,57 +343,23 @@
 			"response": []
 		},
 		{
-			"name": "Create a project FAIL REQUEST",
+			"name": "Create a project SUCCESS Copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status Code Creat a project is 405\", function () {\r",
-							"    pm.response.to.have.status(405);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "./test-data/video5.mp4"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a project REQUEST MP4",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Upload Fail status code is 500\", function () {\r",
-							"    pm.response.to.have.status(500);\r",
+							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
 							"});\r",
-							""
+							"var response = pm.response.json();\r",
+							"\r",
+							"if(pm.response.to.have.status(201)){\r",
+							"    pm.test(\"Upload Success\", function () {\r",
+							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.set(\"idVideo\", response._id);"
 						],
 						"type": "text/javascript"
 					}
@@ -341,18 +374,17 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/music1.mp3"
+							"src": "./test_data/video5.mp4"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{VideoBaseURL}}/projects/",
+					"raw": "{{VideoBaseURL}}/projects",
 					"host": [
 						"{{VideoBaseURL}}"
 					],
 					"path": [
-						"projects",
-						""
+						"projects"
 					]
 				}
 			},
@@ -1608,7 +1640,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=preview&position=5&crop=0%2C0%2C180%2C90&rotate=-180",
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=preview&position=5&crop=0%2C0%2C480%2C320&rotate=-180",
 					"host": [
 						"{{VideoBaseURL}}"
 					],
@@ -1628,7 +1660,7 @@
 						},
 						{
 							"key": "crop",
-							"value": "0%2C0%2C180%2C90"
+							"value": "0%2C0%2C480%2C320"
 						},
 						{
 							"key": "rotate",
@@ -1828,7 +1860,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/picture1.jpg"
+							"src": "./test_data/picture1.jpg"
 						}
 					]
 				},
@@ -1958,7 +1990,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/video5.mp4"
+							"src": "./test_data/video5.mp4"
 						}
 					]
 				},
@@ -2204,72 +2236,6 @@
 						"projects",
 						"1",
 						"raw"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a project SUCCESS",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete SUCCESS\", () =>{\r",
-							"    pm.response.to.have.status(204)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a project FAIL",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete FAIL\", () =>{\r",
-							"    pm.response.to.have.status(404)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
 					]
 				}
 			},
