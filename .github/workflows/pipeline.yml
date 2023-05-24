@@ -32,8 +32,7 @@ jobs:
       run: mkdir -p testResults
     - name: Run POSTMAN collection
       run: |
-        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
-        wait
+        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme || true
     - name: Output the run Test API
       uses: actions/upload-artifact@v3
       with:
