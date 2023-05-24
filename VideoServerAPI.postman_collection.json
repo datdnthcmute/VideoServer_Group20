@@ -19,18 +19,20 @@
 							"});\r",
 							"\r",
 							"var response = pm.response.json();\r",
+							"if(response != null){\r",
 							"\r",
-							"if(response._items.length > 0 && response._meta.total > 0){\r",
-							"    pm.test(\"The project has video list\", function () {\r",
-							"        pm.expect(response._meta.total).to.above(0);\r",
-							"        pm.expect(response._items.length).to.above(0);\r",
-							"    });\r",
-							"}\r",
-							"else{\r",
-							"    pm.test(\"The project don't has video list\", () =>{\r",
-							"        pm.expect(response._meta.total).to.equal(0);\r",
-							"        pm.expect(response._items.length).to.equal(0);\r",
-							"    })\r",
+							"    if(response._items.length > 0 && response._meta.total > 0){\r",
+							"        pm.test(\"The project has video list\", function () {\r",
+							"            pm.expect(response._meta.total).to.above(0);\r",
+							"            pm.expect(response._items.length).to.above(0);\r",
+							"        });\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The project don't has video list\", () =>{\r",
+							"            pm.expect(response._meta.total).to.equal(0);\r",
+							"            pm.expect(response._items.length).to.equal(0);\r",
+							"        });\r",
+							"    }\r",
 							"}"
 						],
 						"type": "text/javascript"
@@ -47,6 +49,97 @@
 					],
 					"path": [
 						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all projects GET PAGE SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"if(response != null){\r",
+							"\r",
+							"    if(response._items.length > 0 && response._meta.total > 0){\r",
+							"        pm.test(\"The project has video list\", function () {\r",
+							"            pm.expect(response._meta.total).to.above(0);\r",
+							"            pm.expect(response._items.length).to.above(0);\r",
+							"        });\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The project don't has video list\", () =>{\r",
+							"            pm.expect(response._meta.total).to.equal(0);\r",
+							"            pm.expect(response._items.length).to.equal(0);\r",
+							"        });\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/?page=1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all projects GET PAGE FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/?page=0",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
 					]
 				}
 			},
@@ -88,13 +181,53 @@
 					]
 				},
 				"url": {
-					"raw": "{{VideoBaseURL}}/projects/",
+					"raw": "{{VideoBaseURL}}/projects",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project FAIL REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code Creat a project is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test_data/p-01.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1",
 					"host": [
 						"{{VideoBaseURL}}"
 					],
 					"path": [
 						"projects",
-						""
+						"1"
 					]
 				}
 			},
@@ -127,6 +260,48 @@
 							"type": "file",
 							"src": [],
 							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project REQUEST MP4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload Fail status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test_data/sfx_blue_1.mp3"
 						}
 					]
 				},
@@ -270,6 +445,1839 @@
 					"path": [
 						"projects",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project SUCCESS Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var response = pm.response.json()\r",
+							"if(pm.response.to.have.status(201)){\r",
+							"    pm.test(\"Upload Success\", function () {\r",
+							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.set(\"idVideo\", response._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test_data/p-02.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project FAIL\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trim Video BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Trim Video BAD REQUEST\", () =>{\r",
+							"    pm.response.to.have.status(400)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"-1,-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trim Video NOTFOUND REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Trim Video NOT FOUND REQUEST\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"-1,-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/project/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"project",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trim Video SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Trim Video Successfully\", () =>{\r",
+							"    pm.response.to.have.status(202)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"console.log(response)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"4,7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trim Video NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Trim Video NOT FOUND\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"5,7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trim Video CONFLICT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Trim Video CONFLICT\", () =>{\r",
+							"    pm.response.to.have.status(409)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"5,7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trim Video ERROR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Trim Video CONFLICT\", () =>{\r",
+							"    pm.response.to.have.status(409)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project SUCCESS Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rotate Video BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Rotate Video BAD REQUEST\", () =>{\r",
+							"    pm.response.to.have.status(400)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"rotate\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rotate Video SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Rotate Video SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(202)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"rotate\": 90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rotate Video NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Trim Video NOT FOUND\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"5,7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rotate Video CONFLICT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Rotate Video CONFLICT\", () =>{\r",
+							"    pm.response.to.have.status(409)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"rotate\": 90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project SUCCESS Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scale Video BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Scale Video BAD REQUEST\", () =>{\r",
+							"    pm.response.to.have.status(400)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"scale\": -1.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scale Video SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Scale Video SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(202)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"rotate\": 90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scale Video NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Scale Video NOT FOUND\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"5,7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scale Video CONFLICT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Scale Video CONFLICT\", () =>{\r",
+							"    pm.response.to.have.status(409)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"rotate\": 90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project SUCCESS Copy 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crop Video BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Crop Video BAD REQUEST\", () =>{\r",
+							"    pm.response.to.have.status(400)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"crop\": \"-160,160,10,10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crop Video SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Crop Video SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(202)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"crop\": \"0,0,320,180\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crop Video NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Crop Video NOT FOUND\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trim\": \"5,7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crop Video CONFLICT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Crop Video CONFLICT\", () =>{\r",
+							"    pm.response.to.have.status(409)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"rotate\": 90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project SUCCESS Copy 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture a thumbnail for a preview at a certain position BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail preview BAD REQUEST\", () =>{\r",
+							"    pm.response.to.have.status(400)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=thumbnail&amount=-5",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "thumbnail"
+						},
+						{
+							"key": "amount",
+							"value": "-5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture a thumbnail for a preview at a certain position SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail preview SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(202)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=preview&position=5",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "preview"
+						},
+						{
+							"key": "position",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture a thumbnail for a preview at a certain position CONFLICT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail preview CONFLICT\", () =>{\r",
+							"    pm.response.to.have.status(409)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=preview&position=5",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "preview"
+						},
+						{
+							"key": "position",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture a thumbnail for a preview at a certain position NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail preview CONFLICT\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1/thumbnails?type=preview&position=5",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "preview"
+						},
+						{
+							"key": "position",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project SUCCESS Copy 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture a thumbnail for a preview at a certain position with edit position SUCCESS Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail with edit SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(202)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=preview&position=5&crop=0%2C0%2C720%2C360&rotate=-180",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "preview"
+						},
+						{
+							"key": "position",
+							"value": "5"
+						},
+						{
+							"key": "crop",
+							"value": "0%2C0%2C720%2C360"
+						},
+						{
+							"key": "rotate",
+							"value": "-180"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Duplicate a project SUCCESS Copy 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"var response = pm.response.json()\r",
+							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"duplicate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture timeline thumbnails BAD REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail timeline BAD REQUEST\", () =>{\r",
+							"    pm.response.to.have.status(400)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=timeline&amount=-5",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "timeline"
+						},
+						{
+							"key": "amount",
+							"value": "-5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture timeline thumbnails SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail timeline SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(202)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/thumbnails?type=timeline&amount=3",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "timeline"
+						},
+						{
+							"key": "amount",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture timeline thumbnails NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Capture a thumbnail timeline NOT FOUND\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1/thumbnails?type=timeline&amount=5",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "timeline"
+						},
+						{
+							"key": "amount",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload a custom image file for a preview thumbnail SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload a custom image preview thumbnails SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test_data/thumbnail-01.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload a custom image file for a preview thumbnail FILE NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload a custom image preview thumbnails FILE NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1/thumbnails",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1",
+						"thumbnails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload a custom image file for a preview thumbnail NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload a custom image preview thumbnails NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails/1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload a custom image file for a preview thumbnail FILE ERROR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload a custom image preview thumbnails FILE ERROR\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test_data/p-07.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get preview thumbnail file SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get preview thumbnail SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/thumbnails/preview",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"raw",
+						"thumbnails",
+						"preview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get preview thumbnail file NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get preview thumbnail NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1/raw/thumbnails/preview",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1",
+						"raw",
+						"thumbnails",
+						"preview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get timeline thumbnail file SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get preview thumbnail SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=timeline&amount=20",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "timeline"
+						},
+						{
+							"key": "amount",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get timeline thumbnail file FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get preview thumbnail BAD REQUEST\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=timeline&amount=0",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"thumbnails"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "timeline"
+						},
+						{
+							"key": "amount",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get video stream SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload a custom image preview thumbnails SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/video",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideoDuplicate}}",
+						"raw",
+						"video"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get video stream NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload a custom image preview thumbnails NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1/raw",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1",
+						"raw"
 					]
 				}
 			},
