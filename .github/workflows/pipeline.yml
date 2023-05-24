@@ -23,17 +23,16 @@ jobs:
     - name: Install Node
       uses: actions/setup-node@v3
       with:
-        node-version: 12
+        node-version: "16.x"
     - name: Install newman
       run: |
         npm install -g newman
         npm install -g newman-reporter-htmlextra
-        newman -v
     - name: Make Directory for results
       run: mkdir -p testResults
     - name: Run POSTMAN collection
       run: |
-        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme || true
+        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
     - name: Output the run Test API
       uses: actions/upload-artifact@v3
       with:
@@ -66,6 +65,7 @@ jobs:
               git clone https://github.com/datdnthcmute/VideoServer_Group20.git
               wait
             fi
+            
   stop-old-container:
     name: Stop Already Container
     runs-on: ubuntu-latest
@@ -121,8 +121,6 @@ jobs:
           sudo systemctl start docker
           wait
           sudo systemctl enable docker
-          wait
-          gpasswd -a $USER docker
           wait
           curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
           chmod +x ~/docker-compose
