@@ -75,7 +75,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/music1.mp3"
+							"src": "./data/music1.mp3"
 						}
 					]
 				},
@@ -109,7 +109,7 @@
 							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
 							"    });\r",
 							"}\r",
-							"pm.globals.set(\"idVideo\", response._id);"
+							"pm.environment.set(\"idVideo\", response._id);"
 						],
 						"type": "text/javascript"
 					}
@@ -124,7 +124,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/video5.mp4"
+							"src": "./data/video5.mp4"
 						}
 					]
 				},
@@ -223,7 +223,7 @@
 							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
 							"    });\r",
 							"}\r",
-							"pm.globals.set(\"idVideo\", response._id);"
+							"pm.environment.set(\"idVideo\", response._id);"
 						],
 						"type": "text/javascript"
 					}
@@ -238,7 +238,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/video5.mp4"
+							"src": "./data/video5.mp4"
 						}
 					]
 				},
@@ -331,7 +331,7 @@
 							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							"pm.environment.set(\"idVideoDuplicate\", response._id);\r",
 							""
 						],
 						"type": "text/javascript"
@@ -650,7 +650,7 @@
 							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							"pm.environment.set(\"idVideoDuplicate\", response._id);\r",
 							""
 						],
 						"type": "text/javascript"
@@ -851,7 +851,7 @@
 							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							"pm.environment.set(\"idVideoDuplicate\", response._id);\r",
 							""
 						],
 						"type": "text/javascript"
@@ -1052,7 +1052,7 @@
 							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							"pm.environment.set(\"idVideoDuplicate\", response._id);\r",
 							""
 						],
 						"type": "text/javascript"
@@ -1253,7 +1253,7 @@
 							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							"pm.environment.set(\"idVideoDuplicate\", response._id);\r",
 							""
 						],
 						"type": "text/javascript"
@@ -1460,7 +1460,7 @@
 							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							"pm.environment.set(\"idVideoDuplicate\", response._id);\r",
 							""
 						],
 						"type": "text/javascript"
@@ -1546,7 +1546,7 @@
 							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
+							"pm.environment.set(\"idVideoDuplicate\", response._id);\r",
 							""
 						],
 						"type": "text/javascript"
@@ -1724,7 +1724,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/picture1.jpg"
+							"src": "./data/picture1.jpg"
 						}
 					]
 				},
@@ -1854,7 +1854,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/video5.mp4"
+							"src": "./data/music1.mp3"
 						}
 					]
 				},
@@ -2106,6 +2106,43 @@
 			"response": []
 		},
 		{
+			"name": "List all projects GET PAGE FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/?page=-1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "List all projects",
 			"event": [
 				{
@@ -2198,43 +2235,6 @@
 						{
 							"key": "page",
 							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List all projects GET PAGE FAIL",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status Code List all projects is 500\", function () {\r",
-							"    pm.response.to.have.status(500);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/?page=0",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						""
-					],
-					"query": [
-						{
-							"key": "page",
-							"value": "0"
 						}
 					]
 				}
