@@ -126,14 +126,15 @@ jobs:
           wait
           sudo systemctl start docker
           wait
+          curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+          chmod +x ~/docker-compose
+          sudo mv ~/docker-compose /usr/local/bin/docker-compose
+          wait
+          sudo dockerd
           ls -l /var/run/docker.sock
           sudo chown root:docker /var/run/docker.sock
           wait
           sudo usermod -aG docker $USER
-          wait
-          curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-          chmod +x ~/docker-compose
-          sudo mv ~/docker-compose /usr/local/bin/docker-compose
           wait
           cd VideoServer_Group20
           sudo docker-compose up -d --build
