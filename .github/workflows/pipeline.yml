@@ -123,7 +123,7 @@ jobs:
           sudo yum update -y
           wait
           sudo yum install docker
-          sudo usermod -a -G docker ec2-user
+          sudo usermod -a -G docker $USER
           id ec2-user
           newgrp docker
           wait
