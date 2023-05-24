@@ -122,11 +122,14 @@ jobs:
           sudo su
           sudo yum install docker
           wait
-          newgrp docker
-          wait
           sudo systemctl enable docker
           wait
           sudo systemctl start docker
+          wait
+          ls -l /var/run/docker.sock
+          sudo chown root:docker /var/run/docker.sock
+          wait
+          sudo usermod -aG docker $USER
           wait
           curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
           chmod +x ~/docker-compose
