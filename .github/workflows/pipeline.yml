@@ -122,7 +122,7 @@ jobs:
           sudo su
           sudo yum install docker
           wait
-          sudo usermod -a -G docker $USER
+          newgrp docker
           wait
           sudo systemctl enable docker
           wait
