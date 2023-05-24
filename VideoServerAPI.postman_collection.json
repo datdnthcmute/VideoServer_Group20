@@ -609,7 +609,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Trim Video CONFLICT\", () =>{\r",
-							"    pm.response.to.have.status(400)\r",
+							"    pm.response.to.have.status(409)\r",
 							"})\r",
 							"\r",
 							"\r",
@@ -643,7 +643,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Trim Video ERROR\", () =>{\r",
-							"    pm.response.to.have.status(400)\r",
+							"    pm.response.to.have.status(409)\r",
 							"})\r",
 							"\r",
 							"\r",
