@@ -150,7 +150,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"try{\r",
 							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
@@ -161,10 +160,7 @@
 							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
 							"    });\r",
 							"}\r",
-							"pm.globals.set(\"idVideo\", response._id);}\r",
-							"catch(e){\r",
-							"    console.log('Message: ', e.message);\r",
-							"}"
+							"pm.globals.set(\"idVideo\", response._id);\r"
 						],
 						"type": "text/javascript"
 					}
@@ -179,7 +175,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/video5.mp4"
+							"src": "/VideoServer_Group20/test-data/video5.mp4"
 						}
 					]
 				},
