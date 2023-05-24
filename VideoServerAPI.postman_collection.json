@@ -179,7 +179,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/video5.mp4"
+							"src": "/VideoServer_Group20/test-data/video5.mp4"
 						}
 					]
 				},
