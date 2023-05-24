@@ -19,20 +19,19 @@
 							"});\r",
 							"\r",
 							"var response = pm.response.json();\r",
-							"if(response != null){\r",
 							"\r",
-							"    if(response._items.length > 0 && response._meta.total > 0){\r",
-							"        pm.test(\"The project has video list\", function () {\r",
-							"            pm.expect(response._meta.total).to.above(0);\r",
-							"            pm.expect(response._items.length).to.above(0);\r",
-							"        });\r",
-							"    }\r",
-							"    else{\r",
-							"        pm.test(\"The project don't has video list\", () =>{\r",
-							"            pm.expect(response._meta.total).to.equal(0);\r",
-							"            pm.expect(response._items.length).to.equal(0);\r",
-							"        });\r",
-							"    }\r",
+							"\r",
+							"if(response._items.length > 0 && response._meta.total > 0){\r",
+							"    pm.test(\"The project has video list\", function () {\r",
+							"        pm.expect(response._meta.total).to.above(0);\r",
+							"        pm.expect(response._items.length).to.above(0);\r",
+							"    });\r",
+							"}\r",
+							"else{\r",
+							"    pm.test(\"The project don't has video list\", () =>{\r",
+							"        pm.expect(response._meta.total).to.equal(0);\r",
+							"        pm.expect(response._items.length).to.equal(0);\r",
+							"    });\r",
 							"}"
 						],
 						"type": "text/javascript"
@@ -66,20 +65,19 @@
 							"});\r",
 							"\r",
 							"var response = pm.response.json();\r",
-							"if(response != null){\r",
 							"\r",
-							"    if(response._items.length > 0 && response._meta.total > 0){\r",
-							"        pm.test(\"The project has video list\", function () {\r",
-							"            pm.expect(response._meta.total).to.above(0);\r",
-							"            pm.expect(response._items.length).to.above(0);\r",
-							"        });\r",
-							"    }\r",
-							"    else{\r",
-							"        pm.test(\"The project don't has video list\", () =>{\r",
-							"            pm.expect(response._meta.total).to.equal(0);\r",
-							"            pm.expect(response._items.length).to.equal(0);\r",
-							"        });\r",
-							"    }\r",
+							"\r",
+							"if(response._items.length > 0 && response._meta.total > 0){\r",
+							"    pm.test(\"The project has video list\", function () {\r",
+							"        pm.expect(response._meta.total).to.above(0);\r",
+							"        pm.expect(response._items.length).to.above(0);\r",
+							"    });\r",
+							"}\r",
+							"else{\r",
+							"    pm.test(\"The project don't has video list\", () =>{\r",
+							"        pm.expect(response._meta.total).to.equal(0);\r",
+							"        pm.expect(response._items.length).to.equal(0);\r",
+							"    });\r",
 							"}"
 						],
 						"type": "text/javascript"
@@ -216,7 +214,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/p-01.mp4"
+							"src": "./test_data/p-02.mp4"
 						}
 					]
 				},
@@ -481,7 +479,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/p-02.mp4"
+							"src": "./test_data/p-03.mp4"
 						}
 					]
 				},
@@ -2032,7 +2030,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/p-07.mp4"
+							"src": "./test_data/p-04.mp4"
 						}
 					]
 				},
