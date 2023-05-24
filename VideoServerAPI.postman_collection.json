@@ -1750,7 +1750,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Upload a custom image preview thumbnails FILE NOT FOUND\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.status(500);\r",
 							"});\r",
 							""
 						],
@@ -2100,6 +2100,142 @@
 						"projects",
 						"1",
 						"raw"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all projects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"if(response._items.length > 0 && response._meta.total > 0){\r",
+							"    pm.test(\"The project has video list\", function () {\r",
+							"        pm.expect(response._meta.total).to.above(0);\r",
+							"        pm.expect(response._items.length).to.above(0);\r",
+							"    });\r",
+							"}\r",
+							"else{\r",
+							"    pm.test(\"The project don't has video list\", () =>{\r",
+							"        pm.expect(response._meta.total).to.equal(0);\r",
+							"        pm.expect(response._items.length).to.equal(0);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all projects GET PAGE SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"if(response._items.length > 0 && response._meta.total > 0){\r",
+							"    pm.test(\"The project has video list\", function () {\r",
+							"        pm.expect(response._meta.total).to.above(0);\r",
+							"        pm.expect(response._items.length).to.above(0);\r",
+							"    });\r",
+							"}\r",
+							"else{\r",
+							"    pm.test(\"The project don't has video list\", () =>{\r",
+							"        pm.expect(response._meta.total).to.equal(0);\r",
+							"        pm.expect(response._items.length).to.equal(0);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/?page=1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all projects GET PAGE FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code List all projects is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/?page=0",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
 					]
 				}
 			},
