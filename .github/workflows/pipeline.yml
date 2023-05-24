@@ -120,9 +120,9 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           sudo su
-          sudo usermod -a -G docker $USER
-          wait
           sudo yum install docker
+          wait
+          sudo usermod -a -G docker $USER
           wait
           sudo systemctl enable docker
           wait
