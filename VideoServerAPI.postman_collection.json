@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "d62c123c-801d-4a82-874c-dfd47fcfacaa",
+		"_postman_id": "5596bb92-b8c7-4134-af67-d2ed604ebae2",
 		"name": "VideoServerAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26385262",
-		"_collection_link": "https://grey-escape-627582.postman.co/workspace/My-Workspace~7de5bc83-fa36-41d9-8b37-2b984274c326/collection/26385262-d62c123c-801d-4a82-874c-dfd47fcfacaa?action=share&creator=26385262&source=collection_link"
+		"_collection_link": "https://grey-escape-627582.postman.co/workspace/My-Workspace~7de5bc83-fa36-41d9-8b37-2b984274c326/collection/26385262-5596bb92-b8c7-4134-af67-d2ed604ebae2?action=share&creator=26385262&source=collection_link"
 	},
 	"item": [
 		{
@@ -160,7 +160,7 @@
 							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
 							"    });\r",
 							"}\r",
-							"pm.globals.set(\"idVideo\", response._id);\r"
+							"pm.globals.set(\"idVideo\", response._id);"
 						],
 						"type": "text/javascript"
 					}
@@ -175,7 +175,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/VideoServer_Group20/test-data/video5.mp4"
+							"src": "./test_data/video5.mp4"
 						}
 					]
 				},
@@ -191,6 +191,32 @@
 			},
 			"response": []
 		}
-		
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "VideoBaseURL",
+			"value": "http://localhost:5050",
+			"type": "string"
+		}
 	]
 }
