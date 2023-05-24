@@ -100,7 +100,7 @@ jobs:
           sudo su
           docker system prune -a -f
           wait
-  deploy:
+  eploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
     needs: remove-old-container
@@ -121,6 +121,8 @@ jobs:
           sudo systemctl start docker
           wait
           sudo systemctl enable docker
+          wait
+          sudo /var/run/docker.sock
           wait
           curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
           chmod +x ~/docker-compose
