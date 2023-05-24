@@ -1921,7 +1921,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/video1.mp4"
+							"src": "./test-data/video5.mp4"
 						}
 					]
 				},
