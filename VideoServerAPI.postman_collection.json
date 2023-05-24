@@ -174,7 +174,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/p-01.mp4"
+							"src": "./test-data/video2.mp4"
 						}
 					]
 				},
@@ -214,7 +214,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/p-02.mp4"
+							"src": "./test-data/video1.mp4"
 						}
 					]
 				},
@@ -299,7 +299,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/sfx_blue_1.mp3"
+							"src": "./test-data/music1.mp3"
 						}
 					]
 				},
@@ -479,7 +479,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/p-03.mp4"
+							"src": "./test-data/video3.mp4"
 						}
 					]
 				},
@@ -1900,7 +1900,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/thumbnail-01.jpg"
+							"src": "./test-data/picture1.jpg"
 						}
 					]
 				},
@@ -2030,7 +2030,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test_data/p-04.mp4"
+							"src": "./test-data/video4.mp4"
 						}
 					]
 				},
