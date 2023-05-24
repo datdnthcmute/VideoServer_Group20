@@ -119,17 +119,22 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          sudo pacman -S libxcrypt-compat
+          sudo su
+          sudo usermod -a -G docker $USER
+          wait
           sudo yum install docker
-
-          sudo systemctl restart docker
-
-          sudo systemctl start docker
+          wait
           sudo systemctl enable docker
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
+          wait
+          sudo systemctl start docker
+          wait
+          curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+          chmod +x ~/docker-compose
+          sudo mv ~/docker-compose /usr/local/bin/docker-compose
+          wait
           cd VideoServer_Group20
           sudo docker-compose up -d --build
+          wait
           cd ../
   check-deploy:
     name: Check Deploy Is Success
