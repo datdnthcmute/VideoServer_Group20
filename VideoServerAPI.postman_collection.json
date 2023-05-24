@@ -141,72 +141,6 @@
 			"response": []
 		},
 		{
-			"name": "Delete a project SUCCESS",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete SUCCESS\", () =>{\r",
-							"    pm.response.to.have.status(204)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a project FAIL",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete FAIL\", () =>{\r",
-							"    pm.response.to.have.status(404)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Create a project SUCCESS Copy",
 			"event": [
 				{
@@ -2236,6 +2170,72 @@
 							"key": "page",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a project SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Project delete SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(204)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a project FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Project delete FAIL\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1"
 					]
 				}
 			},

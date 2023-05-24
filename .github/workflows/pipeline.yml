@@ -125,6 +125,7 @@ jobs:
           sudo yum install docker
           wait
           sudo systemctl start docker
+          dokerd
           wait
           sudo systemctl enable docker
           wait
