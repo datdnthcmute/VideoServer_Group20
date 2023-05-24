@@ -14,7 +14,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Upload Fail\", function () {\r",
+							"pm.test(\"Upload Fail\", function () {\r" ,
 							"    pm.response.to.have.status(400);\r",
 							"});\r",
 							""
