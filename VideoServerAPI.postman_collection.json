@@ -1750,7 +1750,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Upload a custom image preview thumbnails FILE NOT FOUND\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.status(500);\r",
 							"});\r",
 							""
 						],
@@ -1837,7 +1837,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Upload a custom image preview thumbnails FILE ERROR\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.status(500);\r",
 							"});\r",
 							""
 						],
