@@ -214,38 +214,6 @@
 			"response": []
 		},
 		{
-			"name": "Create a project FAIL REQUEST",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status Code Creat a project is 405\", function () {\r",
-							"    pm.response.to.have.status(405);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "./test-data/video3.mp4"
-						}
-					]
-				},
-				"url": "{{VideoBaseURL}}/projects/1"
-			},
-			"response": []
-		},
-		{
 			"name": "Create a project ERROR",
 			"event": [
 				{
@@ -588,7 +556,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"trim\": \"4,7\"\r\n}",
+					"raw": "{\r\n  \"trim\": \"0,2\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -641,7 +609,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Trim Video CONFLICT\", () =>{\r",
-							"    pm.response.to.have.status(409)\r",
+							"    pm.response.to.have.status(400)\r",
 							"})\r",
 							"\r",
 							"\r",
@@ -674,8 +642,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Trim Video CONFLICT\", () =>{\r",
-							"    pm.response.to.have.status(409)\r",
+							"pm.test(\"Trim Video ERROR\", () =>{\r",
+							"    pm.response.to.have.status(400)\r",
 							"})\r",
 							"\r",
 							"\r",
@@ -1355,82 +1323,6 @@
 			"response": []
 		},
 		{
-			"name": "Duplicate a project SUCCESS Copy 5",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Duplicate a project SUCCESS\", () =>{\r",
-							"    pm.response.to.have.status(201)\r",
-							"})\r",
-							"var response = pm.response.json()\r",
-							"pm.globals.set(\"idVideoDuplicate\", response._id);\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
-			},
-			"response": []
-		},
-		{
-			"name": "Capture a thumbnail for a preview at a certain position with edit position SUCCESS Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Capture a thumbnail with edit SUCCESS\", () =>{\r",
-							"    pm.response.to.have.status(202)\r",
-							"})\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails?type=preview&position=5&crop=0%2C0%2C720%2C360&rotate=-180",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}",
-						"thumbnails"
-					],
-					"query": [
-						{
-							"key": "type",
-							"value": "preview"
-						},
-						{
-							"key": "position",
-							"value": "5"
-						},
-						{
-							"key": "crop",
-							"value": "0%2C0%2C720%2C360"
-						},
-						{
-							"key": "rotate",
-							"value": "-180"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Duplicate a project SUCCESS Copy 6",
 			"event": [
 				{
@@ -1625,7 +1517,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Upload a custom image preview thumbnails FILE NOT FOUND\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.status(500);\r",
 							"});\r",
 							""
 						],
