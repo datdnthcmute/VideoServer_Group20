@@ -127,8 +127,8 @@ jobs:
           id ec2-user
           newgrp docker
           wait
-          sudo systemctl enable docker.service
-          sudo systemctl start docker.service
+          sudo systemctl enable docker
+          sudo systemctl start docker
           wait
           curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
           chmod +x ~/docker-compose
