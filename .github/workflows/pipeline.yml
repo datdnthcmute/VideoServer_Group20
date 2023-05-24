@@ -100,7 +100,7 @@ jobs:
           sudo su
           docker system prune -a -f
           wait
-  eploy:
+  deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
     needs: remove-old-container
