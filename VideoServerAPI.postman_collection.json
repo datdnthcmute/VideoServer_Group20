@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "d62c123c-801d-4a82-874c-dfd47fcfacaa",
 		"name": "VideoServerAPI",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "26385262",
 		"_collection_link": "https://grey-escape-627582.postman.co/workspace/My-Workspace~7de5bc83-fa36-41d9-8b37-2b984274c326/collection/26385262-d62c123c-801d-4a82-874c-dfd47fcfacaa?action=share&creator=26385262&source=collection_link"
 	},
@@ -41,15 +41,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects"
 			},
 			"response": []
 		},
@@ -178,273 +170,7 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a project FAIL REQUEST",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status Code Creat a project is 405\", function () {\r",
-							"    pm.response.to.have.status(405);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "./test-data/video3.mp4"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a project ERROR",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Upload Fail\", function () {\r",
-							"    pm.response.to.have.status(400);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": [],
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a project REQUEST MP4",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Upload Fail status code is 500\", function () {\r",
-							"    pm.response.to.have.status(500);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "./test-data/music1.mp3"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Retrieve project details FOUND",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Retrieve project details FOUND\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Retrieve project details NOT FOUND",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Retrieve project details NOT FOUND\", () => {\r",
-							"    pm.response.to.have.status(404);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a project SUCCESS",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete SUCCESS\", () =>{\r",
-							"    pm.response.to.have.status(204)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a project FAIL",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete FAIL\", () =>{\r",
-							"    pm.response.to.have.status(404)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects"
 			},
 			"response": []
 		},
@@ -479,20 +205,245 @@
 						{
 							"key": "file",
 							"type": "file",
+							"src": "./test-data/video2.mp4"
+						}
+					]
+				},
+				"url": "{{VideoBaseURL}}/projects"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project FAIL REQUEST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code Creat a project is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
 							"src": "./test-data/video3.mp4"
 						}
 					]
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						""
-					]
+				"url": "{{VideoBaseURL}}/projects/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project ERROR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload Fail\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
 				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": "{{VideoBaseURL}}/projects/"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project REQUEST MP4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Upload Fail status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test-data/music1.mp3"
+						}
+					]
+				},
+				"url": "{{VideoBaseURL}}/projects/"
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve project details FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Retrieve project details FOUND\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve project details NOT FOUND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Retrieve project details NOT FOUND\", () => {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{VideoBaseURL}}/projects/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a project SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Project delete SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(204)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a project FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Project delete FAIL\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{VideoBaseURL}}/projects/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project SUCCESS Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var response = pm.response.json()\r",
+							"if(pm.response.to.have.status(201)){\r",
+							"    pm.test(\"Upload Success\", function () {\r",
+							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
+							"    });\r",
+							"}\r",
+							"pm.globals.set(\"idVideo\", response._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "./test-data/video2.mp4"
+						}
+					]
+				},
+				"url": "{{VideoBaseURL}}/projects/"
 			},
 			"response": []
 		},
@@ -517,17 +468,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
 			},
 			"response": []
 		},
@@ -551,17 +492,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1/duplicate"
 			},
 			"response": []
 		},
@@ -595,16 +526,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -638,16 +560,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/project/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"project",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/project/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -682,16 +595,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -725,16 +629,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1"
 			},
 			"response": []
 		},
@@ -768,16 +663,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -802,16 +688,7 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -836,17 +713,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
 			},
 			"response": []
 		},
@@ -878,16 +745,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -919,16 +777,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -962,16 +811,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1"
 			},
 			"response": []
 		},
@@ -1003,16 +843,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -1037,17 +868,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
 			},
 			"response": []
 		},
@@ -1079,16 +900,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -1120,16 +932,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -1163,16 +966,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1"
 			},
 			"response": []
 		},
@@ -1204,16 +998,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -1238,17 +1023,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
 			},
 			"response": []
 		},
@@ -1280,16 +1055,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -1321,16 +1087,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -1364,16 +1121,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1"
 			},
 			"response": []
 		},
@@ -1405,16 +1153,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}"
 			},
 			"response": []
 		},
@@ -1439,17 +1178,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
 			},
 			"response": []
 		},
@@ -1646,17 +1375,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
 			},
 			"response": []
 		},
@@ -1732,17 +1451,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}",
-						"duplicate"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideo}}/duplicate"
 			},
 			"response": []
 		},
@@ -1900,21 +1609,11 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "./test-data/picture1.jpg"
+							"src": "./test-data/picture2.jpg"
 						}
 					]
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}",
-						"thumbnails"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails"
 			},
 			"response": []
 		},
@@ -1947,17 +1646,7 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1/thumbnails",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1",
-						"thumbnails"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1/thumbnails"
 			},
 			"response": []
 		},
@@ -1990,18 +1679,7 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}",
-						"thumbnails",
-						"1"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails/1"
 			},
 			"response": []
 		},
@@ -2034,17 +1712,7 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}",
-						"thumbnails"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/thumbnails"
 			},
 			"response": []
 		},
@@ -2067,19 +1735,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/thumbnails/preview",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}",
-						"raw",
-						"thumbnails",
-						"preview"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/thumbnails/preview"
 			},
 			"response": []
 		},
@@ -2102,19 +1758,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1/raw/thumbnails/preview",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1",
-						"raw",
-						"thumbnails",
-						"preview"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1/raw/thumbnails/preview"
 			},
 			"response": []
 		},
@@ -2233,18 +1877,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/video",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideoDuplicate}}",
-						"raw",
-						"video"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/{{idVideoDuplicate}}/raw/video"
 			},
 			"response": []
 		},
@@ -2267,17 +1900,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1/raw",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1",
-						"raw"
-					]
-				}
+				"url": "{{VideoBaseURL}}/projects/1/raw"
 			},
 			"response": []
 		}
