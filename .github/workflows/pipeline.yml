@@ -17,6 +17,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
+    - name: Make Directory for results
+      run: mkdir testResults
     
     - name: Start Containers
       run: |
@@ -30,19 +33,17 @@ jobs:
     - name: Install Node
       uses: actions/setup-node@v3
       with:
-        node-version: "12.x"
+        node-version: "17.x"
 
     - name: Install newman
       run: |
         npm install -g newman
         npm install -g newman-reporter-htmlextra
 
-    - name: Make Directory for results
-      run: mkdir -p testResults
     - uses: actions/checkout@v3
     - name: Run POSTMAN collection
       run: |
-        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
+        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html
     
     - name: Output the run Test API
       uses: actions/upload-artifact@v3
