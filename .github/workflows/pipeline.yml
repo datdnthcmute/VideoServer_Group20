@@ -19,7 +19,10 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Start Containers
-      run: docker-compose -f "docker-compose.yml" up -d --build
+      run: |
+        docker-compose down -v
+        docker system prune -af
+        docker-compose -f "docker-compose.yml" up -d --build
 
     - name: Check Containers
       run: docker ps
@@ -36,6 +39,7 @@ jobs:
 
     - name: Make Directory for results
       run: mkdir -p testResults
+    - uses: actions/checkout@v3
     - name: Run POSTMAN collection
       run: |
         newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
