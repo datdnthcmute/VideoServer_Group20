@@ -36,11 +36,9 @@ jobs:
 
     - name: Make Directory for results
       run: mkdir -p testResults
-
-    
     - name: Run POSTMAN collection
       run: |
-        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
+        newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
     
     - name: Output the run Test API
       uses: actions/upload-artifact@v3
@@ -74,7 +72,7 @@ jobs:
               wait
               sudo yum install -y git
               wait
-              git clone https://github.com/datdnthcmute/VideoServer_Group20.git 
+              git clone https://github.com/datdnthcmute/VideoServer_Group20.git
               wait
             fi
 
