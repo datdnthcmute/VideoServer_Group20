@@ -141,120 +141,6 @@
 			"response": []
 		},
 		{
-			"name": "Delete a project SUCCESS",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete SUCCESS\", () =>{\r",
-							"    pm.response.to.have.status(204)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"{{idVideo}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a project FAIL",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Project delete FAIL\", () =>{\r",
-							"    pm.response.to.have.status(404)\r",
-							"})\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects/1",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a project SUCCESS",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status Code Creat a project is 201\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"var response = pm.response.json();\r",
-							"\r",
-							"if(pm.response.to.have.status(201)){\r",
-							"    pm.test(\"Upload Success\", function () {\r",
-							"        pm.expect(response.metadata.codec_name).to.equal(\"h264\");\r",
-							"    });\r",
-							"}\r",
-							"pm.environment.set(\"idVideo\", response._id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "./data/video6.mp4"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{VideoBaseURL}}/projects",
-					"host": [
-						"{{VideoBaseURL}}"
-					],
-					"path": [
-						"projects"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Retrieve project details FOUND",
 			"event": [
 				{
@@ -2236,6 +2122,72 @@
 							"key": "page",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a project SUCCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Project delete SUCCESS\", () =>{\r",
+							"    pm.response.to.have.status(204)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/{{idVideo}}",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"{{idVideo}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a project FAIL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Project delete FAIL\", () =>{\r",
+							"    pm.response.to.have.status(404)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{VideoBaseURL}}/projects/1",
+					"host": [
+						"{{VideoBaseURL}}"
+					],
+					"path": [
+						"projects",
+						"1"
 					]
 				}
 			},
