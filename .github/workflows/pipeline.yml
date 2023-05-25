@@ -13,43 +13,46 @@ jobs:
   #   name: Build-and-Test
   #   timeout-minutes: 10
   #   runs-on: ubuntu-latest
+
   #   steps:
   #   - name: Checkout
   #     uses: actions/checkout@v3
+    
   #   - name: Start Containers
-  #     run: |
-  #       docker-compose down -v
-  #       docker system prune -af 
-  #       docker-compose -f "docker-compose.yml" up -d --build
+  #     run: docker-compose -f "docker-compose.yml" up -d --build
+
   #   - name: Check Containers
   #     run: docker ps
+
   #   - name: Install Node
   #     uses: actions/setup-node@v3
   #     with:
-  #       node-version: 16
+  #       node-version: "16.x"
+
   #   - name: Install newman
   #     run: |
   #       npm install -g newman
   #       npm install -g newman-reporter-htmlextra
+
   #   - name: Make Directory for results
   #     run: mkdir -p testResults
-  #   - uses: actions/checkout@v3
+
+    
   #   - name: Run POSTMAN collection
   #     run: |
-  #       newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme || true
+  #       newman run VideoServerAPI.postman_collection.json --environment=VideoServerAPI.postman_environment.json --globals=workspace.postman_globals.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme
+    
   #   - name: Output the run Test API
   #     uses: actions/upload-artifact@v3
   #     with:
   #       name: APITestReport
   #       path: testResults
-  #   - name: Destroy All Database
-  #     run: |
-  #       docker-compose down -v
-  #       docker system prune -af 
+
   pull-or-push-project:
     name: Pull or Push Project
     runs-on: ubuntu-latest
     steps:
+
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
         with:
@@ -58,9 +61,10 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+          
             if [ -d "VideoServer_Group20" ]; then
               cd VideoServer_Group20
-              git pull https://github.com/datdnthcmute/VideoServer_Group20.git
+              git pull https://github.com/datdnthcmute/VideoServer_Group20.git 
               wait
               cd ../
             else
@@ -69,9 +73,10 @@ jobs:
               wait
               sudo yum install -y git
               wait
-              git clone https://github.com/datdnthcmute/VideoServer_Group20.git
+              git clone https://github.com/datdnthcmute/VideoServer_Group20.git 
               wait
             fi
+
   stop-old-container:
     name: Stop Already Container
     runs-on: ubuntu-latest
@@ -86,10 +91,9 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           sudo su
-          cd VideoServer_Group20
           docker-compose down -v
           wait
-          cd ../
+
   remove-old-container:
     name: Remove Already Container
     needs: stop-old-container
@@ -104,8 +108,9 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           sudo su
-          docker system prune -a -f
+          docker system prune -af
           wait
+
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
@@ -119,25 +124,28 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          sudo su
-          sudo yum install docker
+          sudo yum update -y
           wait
-          sudo systemctl enable docker
+          sudo yum install -y docker
           wait
           sudo systemctl start docker
+          wait
+          sudo systemctl enable docker
           wait
           sudo usermod -aG docker $USER
           wait
           sudo chmod 666 /var/run/docker.sock
           wait
-          curl -L https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-          chmod +x ~/docker-compose
-          sudo mv ~/docker-compose /usr/local/bin/docker-compose
+          sudo curl -SL https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
           wait
-          cd VideoServer_Group20
-          sudo docker-compose up -d --build
+          sudo chmod +x /usr/local/bin/docker-compose
+          wait
+          cd VideoServer_Group20s
+          wait
+          sudo docker-compose up -d
           wait
           cd ../
+  
   check-deploy:
     name: Check Deploy Is Success
     runs-on: ubuntu-latest
