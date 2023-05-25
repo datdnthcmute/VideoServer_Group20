@@ -136,7 +136,7 @@ jobs:
           wait
           sudo chmod 666 /var/run/docker.sock
           wait
-          sudo curl -SL https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+          sudo curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
           wait
           sudo chmod +x /usr/local/bin/docker-compose
           wait
